@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?><metadata>
+    <idinfo>
+        <citation>
+            <citeinfo>
+                <origin/>
+                <pubdate>20240410</pubdate>
+                <title>State Routes of Washington State 1:500,000 (2024), Routes</title>
+                <geoform>vector digital data</geoform>
+                <onlink>https://data.wsdot.wa.gov/arcgis/rest/services/Shared/LRSData/MapServer/6</onlink>
+                <onlink>https://data.wsdot.wa.gov/geospatial/DOT_TDO/LRS/500kLRS_2024.zip</onlink>
+            </citeinfo>
+        </citation>
+        <descript>
+            <abstract>State Routes are depicted as lines with State Route identifiers. Each SR is symbolized with a single line whether or not the highway is divided. Entrance, exit and collector/distributor ramps are not included, but spurs, couplets and reversible lanes are. Please direct questions about this dataset to: TransportationGISDataSteward@wsdot.wa.gov.</abstract>
+            <purpose>The data provide a small-scale cartographic rendition of Washington State highways. They also represent the linear reference system (LRS) used by Washington State Department of Transportation. This data set is used: 1) for general-purpose base mapping; 2) as a Linear Referencing System (LRS); 3) for locating features on the State Route network by State Route Accumulated Route Mileage (dynamic segmentation). This dataset is a snapshot of the roadway system, effective 12/31/2024.</purpose>
+        </descript>
+        <timeperd>
+            <timeinfo>
+                <sngdate>
+                    <caldate>20240410</caldate>
+                </sngdate>
+            </timeinfo>
+            <current>ground condition</current>
+        </timeperd>
+        <status>
+            <progress>Complete</progress>
+            <update>Annually</update>
+        </status>
+        <spdom>
+            <bounding>
+                <westbc>-124.675082</westbc>
+                <eastbc>-116.861350</eastbc>
+                <northbc>49.042517</northbc>
+                <southbc>45.504819</southbc>
+            </bounding>
+        </spdom>
+        <keywords>
+            <theme>
+                <themekt>None</themekt>
+                <themekey>state route</themekey>
+                <themekey>LRS</themekey>
+                <themekey>highway</themekey>
+                <themekey>SR</themekey>
+                <themekey>linear reference system</themekey>
+            </theme>
+            <place>
+                <placekt>None</placekt>
+                <placekey>United States</placekey>
+                <placekey>Washington</placekey>
+                <placekey>WA</placekey>
+                <placekey>USA</placekey>
+            </place>
+        </keywords>
+        <accconst>None</accconst>
+        <useconst>For Planning use only. The Washington State Department of Transportation (WSDOT) shall not be liable for any activity involving the use of the data, including, but not limited to, lost profits or savings or any other economic or consequential damages. Nor does the WSDOT warrant the fitness of the data for use for a particular purpose, or the installation of the data, its use, or the results obtained.
+To the fullest extent permitted by law, the Data User shall hold harmless, defend at its own expense, and indemnify WSDOT, its officers, employees, agents, and volunteers, against any and all liability, claims, losses, damages, or expenses, including reasonable attorney’s fees, arising from all acts or omissions of the Data User or its officers, agents, or employees in its use of the WSDOT data.</useconst>
+        <ptcontac>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Washington State Department of Transportation</cntorg>
+                </cntorgp>
+                <cntemail>TransportationGISDataSteward@wsdot.wa.gov</cntemail>
+            </cntinfo>
+        </ptcontac>
+        <datacred>Washington State Department of Transportation</datacred>
+        <native>Version 6.2 (Build 9200) ; Esri ArcGIS 10.9.1.28388</native>
+    </idinfo>
+    <dataqual>
+        <attracc>
+            <attraccr>State route numbers and accumulated route mileage values were obtained from the State Highway Log.</attraccr>
+        </attracc>
+        <logic>These data form a network representing the connectivity of the State Routes (SR's) of Washington State. Nodes represent SR endpoints. Also, nodes occur where SR's intersect with other SR's, with county boundaries, and with Washington State Department of Transportation region boundaries.</logic>
+        <complete>The data set contains all of the state routes in the State of Washington. San Juan County contains no State Routes.</complete>
+        <posacc>
+            <horizpa>
+                <horizpar>Positional accuracy has not been determined.</horizpar>
+            </horizpa>
+        </posacc>
+        <lineage>
+            <srcinfo>
+                <typesrc>None</typesrc>
+                <srccontr>Geometry depicting Washington State Highways, attributes, and measure values to create the various 24k LRSs. These sources have included: USGS 7.5 Minute Quadrangles WSDOT Interchange Diagrams WSDOT State Highway Log GPS Based LRS Orthoimagery from DNR, Nies Mapping Group, Inc., NAIP, and the WSDOT Photogrammerty Office For more detailed information about these sources contact the data steward.</srccontr>
+            </srcinfo>
+            <procstep>
+                <procdesc>3/14/1997 - Michelle Blake The source file state.dgn was digitized from various printed maps--principally the USGS Washington State wall map--using Intergraph Microstation software. Srclean.dgn contains state.dgn state routes depicted as single lines. In cases where highways are divided and intersect with other SR's, the intersection of the increasing sides were chosen for depiction. The srclean.dgn file was converted into an Arc/Info coverage with the Arc "IGDSARC" command. Attributes storing the beginning and ending route measures for each line were added using custom menus in "ARCEDIT," and routes were created with the "ARCSECTION" command. The coverage was transformed to geographic coordinates using Arc commands "PROJECTDEFINE" and "PROJECT." This produced the 1996 LRS. 01/15/1999 - Thomas A. Blake The 1998 version of this data set was updated with the changes that had occurred to the State Highway System. This update was reflected in the 1998 LRS. 10/23/2001 - Thomas A. Blake The 2000 version of this data set was updated with the changes that had occurred to the State Highway System. This update was reflected in the 2000 LRS. 12/01/2004 - Heather Spates The 2001 version of this data set was updated with the changes that had occurred to the State Highway System. The data was projected from geographic coordinates to Washington State Plane South NAD 83. This update was reflected in the 2003 LRS. 01/16/2006 - Heather Spates Ferry Terminals located in the TRIPS systems and selected Proposed routes (found in both TRIPS and other records) are included in this edition. Ferry Terminals were located via orthophotos on the end of cartographically drawn ferry routes. Proposed route linework are compiled from paper contract sheets. This update was reflected in the 2004 LRS 2/6/2006 - Heather Spates The LRS data was edited to reflect changes in the state highway system according to the 2005 Washington State Road Log. This update was reflected in the 2005 LRS. 07/24/2006 - Jordyn Mitchell 4 new attributes were added with the 2006 update. SRID, RID, RRT, RRQ. These were added to enable easier sorting and selecting of records. These were derived from the SR field. This update was reflected in the 2006 LRS. 05/21/2008 - Julie Fogde The 2007 LRS is an update of the 2006 LRS. A copy of the Lines file of the 2006 LRS was updated using the 2007 Highway Log, GPS LRS, orthophotos, highway contract plans, and WSDOT project websites. Polylines were then broken out by direction and built into routes. This update was reflected in the 2007 LRS. 06/03/2009 - Derek Drake The LRS data was edited to reflect changes in the state highway system according to the 2008 Washington State Road Log. This update was reflected in the 2008 LRS. 05/25/2010 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2009 Washington State Road Log. A new attribute LRS Date was added to indicate the valid date of the measures (ARMs) used to update the data set. This update was reflected in the 2009 LRS. 03/31/2011 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2010 Washington State Road Log. This update was reflected in the 2010 LRS. 11/15/2011 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the Washington State Highway Log as of 9/30/2010. 04/15/2012 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2011 Washington State Road Log. This update was reflected in the 2011 LRS. 06/15/2012 - Thomas A. Blake The Region attribute along US 12 was updated to reflect a WSDOT Region Boundary change between the Southwest and South Central regions. No other changes were made. 03/15/2013 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2012 Washington State Road Log. This update was reflected in the 2012 LRS. 04/05/2014 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2013 Washington State Road Log. This update was reflected in the 2013 LRS. 3/15/2015 - Jordyn Mitchell All LRS data stored in SDE was migrated to a new server. Several attributes (SR, SRID, RRT, RRQ) were dropped, replaced, or recalculated to conform to a consistent schema. 04/01/2015 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2014 Washington State Road Log. This update was reflected in the 2014 LRS. 04/01/2016 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2015 Washington State Road Log. This update was reflected in the 2015 LRS. 03/01/2017 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2016 Washington State Road Log. This update was reflected in the 2016 LRS. 02/01/2018 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2017 Washington State Road Log. This update was reflected in the 2017 LRS. 04/15/2019 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2018 Washington State Road Log. This update was reflected in the 2018 LRS. 04/15/2020 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2019 Washington State Road Log. This update was reflected in the 2019 LRS. 03/15/2021 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2020 Washington State Road Log. This update was reflected in the 2020 LRS. 03/15/2022 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2021 Washington State Road Log. This update was reflected in the 2021 LRS. 03/27/2023 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2022 Washington State Road Log. This update was reflected in the 2022 LRS. 03/22/2024 - Thomas A. Blake The LRS data was edited to reflect changes in the state highway system according to the 2023 Washington State Road Log. This update was reflected in the 2023 LRS</procdesc>
+                <procdate>20230327</procdate>
+                <proccont>
+                    <cntinfo>
+                        <cntorgp>
+                            <cntorg>Washington State Department of Transportation</cntorg>
+                        </cntorgp>
+                        <cntemail>TransportationGISDataSteward@wsdot.wa.gov</cntemail>
+                    </cntinfo>
+                </proccont>
+            </procstep>
+        </lineage>
+    </dataqual>
+    <spdoinfo>
+        <indspref>State Route and Accumulated Route Mileage</indspref>
+        <direct>Vector</direct>
+        <ptvctinf>
+            <sdtsterm>
+                <sdtstype>String</sdtstype>
+                <ptvctcnt>279</ptvctcnt>
+            </sdtsterm>
+        </ptvctinf>
+    </spdoinfo>
+    <eainfo>
+        <detailed>
+            <enttyp>
+                <enttypl>sr500k</enttypl>
+            </enttyp>
+            <attr>
+                <attrlabl>DISPLAY</attrlabl>
+                <attrdef>Labels for shields.  Ferry terminals are labeled FT.</attrdef>
+            </attr>
+            <attr>
+                <attrlabl>LRS_Date</attrlabl>
+                <attrdef>The Linear Referencing System date that this record is using for location.</attrdef>
+                <attrdefs>WSDOT Application - DOTS</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>OBJECTID</attrlabl>
+                <attrdef>Internal feature number.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Sequential unique whole numbers that are automatically generated.</udom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>RelRouteQual</attrlabl>
+                <attrdef>A reference used to uniquely identify the physical location of the State Route Related Route Type. The State Route Related Route Qualifier can be based on a State Route Milepost, street name, city, or other distinguishing geographic reference.</attrdef>
+                <attrdefs>WSDOT Application - DOTS</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>RelRouteType</attrlabl>
+                <attrdef>A Code that represents a a classification of a route associated with a mainline state route, examples include: Couplet, Spur, Alternate Route, etc.</attrdef>
+                <attrdefs>WSDOT Application - DOTS</attrdefs>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>Null</edomv>
+                                                
+                        <edomvd>Mainline</edomvd>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>AR</edomv>
+                                                
+                        <edomvd>Alternate Route</edomvd>
+                                                
+                        <edomvds>Washington State Highway Log</edomvds>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>CO</edomv>
+                                                
+                        <edomvd>Couplet</edomvd>
+                                                
+                        <edomvds>Washington State Highway Log</edomvds>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>FT</edomv>
+                                                
+                        <edomvd>Ferry Terminal</edomvd>
+                                                
+                        <edomvds>Washington State Highway Log</edomvds>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>FU</edomv>
+                                                
+                        <edomvd>Future Route</edomvd>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>PR</edomv>
+                                                
+                        <edomvd>Proposed Route</edomvd>
+                                                
+                        <edomvds>Washington State Highway Log</edomvds>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>RL</edomv>
+                                                
+                        <edomvd>Reversible Lane</edomvd>
+                                                
+                        <edomvds>Washington State Highway Log</edomvds>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>SP</edomv>
+                                                
+                        <edomvd>Spur</edomvd>
+                                                
+                        <edomvds>Washington State Highway Log</edomvds>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>RouteID</attrlabl>
+                <attrdef>A unique Route identifier to identify a route (City,County State, Tribal, Forest) in any given data set. For State Routes, Route IDs are assigned by WSDOT's GIS and Roadway Data Office</attrdef>
+                <attrdefs>WSDOT Application - DOTS</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>RT_TYPEA</attrlabl>
+                <attrdef>Route Type (text)</attrdef>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>IS</edomv>
+                                                
+                        <edomvd>Interstate Route</edomvd>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>US</edomv>
+                                                
+                        <edomvd>US Route</edomvd>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>SR</edomv>
+                                                
+                        <edomvd>State Route</edomvd>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>FT</edomv>
+                                                
+                        <edomvd>Ferry Terminal</edomvd>
+                                                
+                        <edomvds>Compiled from TRIPS database.</edomvds>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>PR</edomv>
+                                                
+                        <edomvd>Proposed Route</edomvd>
+                                                
+                        <edomvds>Compiled from TRIPS database with selected records that are not currently in the TRIPS database.</edomvds>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>RT_TYPEB</attrlabl>
+                <attrdef>Route Type (integer)</attrdef>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>0</edomv>
+                                                
+                        <edomvd>State Route</edomvd>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>1</edomv>
+                                                
+                        <edomvd>Interstate Route</edomvd>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>2</edomv>
+                                                
+                        <edomvd>US Route</edomvd>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>5</edomv>
+                                                
+                        <edomvd>Ferry Terminals (FT)</edomvd>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+                <attrdomv>
+                                        
+                    <edom>
+                                                
+                        <edomv>6</edomv>
+                                                
+                        <edomvd>Proposed Routes (PR)</edomvd>
+                                            
+                    </edom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>Shape</attrlabl>
+                <attrdef>Feature geometry.</attrdef>
+                <attrdefs>ESRI</attrdefs>
+                <attrdomv>
+                                        
+                    <udom>Coordinates defining the features.</udom>
+                                    
+                </attrdomv>
+            </attr>
+            <attr>
+                <attrlabl>StateRouteNumber</attrlabl>
+                <attrdef>The number assigned to the State Route and enacted into law by the Washington State Legislature</attrdef>
+                <attrdefs>WSDOT Application - DOTS</attrdefs>
+            </attr>
+            <attr>
+                <attrlabl>SHAPE.STLength()</attrlabl>
+            </attr>
+        </detailed>
+    </eainfo>
+    <distinfo>
+        <distrib>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Washington State Department of Transportation, Office of Information Technology</cntorg>
+                    <cntper>Jordyn Mitchell</cntper>
+                </cntorgp>
+                <cntpos>GIS Database Administrator</cntpos>
+                <cntemail>jordyn.mitchell@wsdot.wa.gov</cntemail>
+            </cntinfo>
+        </distrib>
+        <distliab>The Washington State Department of Transportation shall not be liable for any activity involving this data with regard to lost profits or savings or any other consequential damages; or the fitness for use of the data for a particular purpose; or the installation of the data, its use, or the results obtained.</distliab>
+        <custom>Download individual data sets from https://gisdata-wsdot.opendata.arcgis.com</custom>
+    </distinfo>
+    <metainfo>
+        <metd>20240322</metd>
+        <metc>
+            <cntinfo>
+                <cntorgp>
+                    <cntorg>Washington State Department of Transportation</cntorg>
+                </cntorgp>
+                <cntemail>TransportationGISDataSteward@wsdot.wa.gov</cntemail>
+            </cntinfo>
+        </metc>
+        <metstdn>FGDC Content Standard for Digital Geospatial Metadata</metstdn>
+        <metstdv>FGDC-STD-001-1998</metstdv>
+        <mettc>local time</mettc>
+    </metainfo>
+</metadata>
