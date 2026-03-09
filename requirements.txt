@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+matplotlib
+geopandas
+folium
+geodatasets
+contextily
