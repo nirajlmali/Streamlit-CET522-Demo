@@ -6,3 +6,4 @@ geopandas
 folium
 geodatasets
 contextily
+altair
