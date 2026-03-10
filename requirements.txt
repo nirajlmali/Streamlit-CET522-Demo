@@ -7,3 +7,5 @@ folium
 geodatasets
 contextily
 altair
+shapely
+streamlit_folium
