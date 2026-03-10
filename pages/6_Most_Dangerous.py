@@ -20,6 +20,7 @@ def prep_crash_data(df):
     df = df.merge(df_rc, left_on="FUNC_CLS", right_on="ID", how="left")
     df["urban"] = df["urban"].astype('category')
     df["label"] = np.where(df["urban"] == 1, "Urban", "Rural")
+    df = df[~df["FUNC_CLS"].isin([16,17])]
     return df
 
 @st.cache_data
