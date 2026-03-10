@@ -6,6 +6,7 @@ import geopandas as gpd
 import folium
 import geodatasets
 import contextily as ctx
+import altair as alt
 
 @st.cache_data
 def load_data(path, geo=False):
@@ -14,33 +15,56 @@ def load_data(path, geo=False):
     return pd.read_csv(path)
 
 
-def prep_crash_data(df_crashes):
-    df_crashes = df_crashes.merge(df_sev, left_on="SEVERITY", right_on="ID", how="left")
-    df_crashes = df_crashes.merge(df_rc, left_on="FUNC_CLS", right_on="ID", how="left")
-    df_crashes["urban"] = df_crashes["urban"].astype('category')
-    return df_crashes
+@st.cache_data
+def prep_crash_data(df):
+    df = df.merge(df_sev, left_on="SEVERITY", right_on="ID", how="left")
+    df = df.merge(df_rc, left_on="FUNC_CLS", right_on="ID", how="left")
+    df["urban"] = df["urban"].astype('category')
+    df["label"] = np.where(df["urban"] == 1, "Urban", "Rural")
+    return df
 
 @st.cache_data
-def prep_agg_data(df, cols, indexName):
-    return df.groupby(cols).size().reset_index(name=indexName)
+def prep_agg_data(df, cols, indexName, roadclass=False):
+    if roadclass:
+        df["DISPLAY"] = np.where(
+            df["ROAD_CLASS_DESC_FULL"].isin([" Urban-Interstate", " Urban-Principal-Arterial (Freeways & Expressways)"]),
+            "Urban-Interstate & Principal-Arterial",
+            df["ROAD_CLASS_DESC_FULL"]
+        )
+    new_df = df.groupby(cols).size().reset_index(name=indexName)
+    return new_df
+
 
 # Load data
 df_crashes = load_data("clean_data/crashes.csv")
 df_3mile = load_data("clean_data/3milesegments.csv")
+df_roads = load_data("clean_data/roads.csv")
+df_vehicles = load_data("clean_data/vehicles.csv")
 
 # Data code descriptions
 df_sev = load_data("clean_data/SEVERITY.csv")
 df_rc = load_data("clean_data/ROAD_CLASS.csv")
 
+# Merge
+df_crashes_roads = df_crashes.merge(df_roads, on=["RTE_NBR", "BEGMP", "ENDMP"], how="left")
+
 # Prep crash data
-df_crashes = prep_crash_data(df_crashes)
+df_crashes_roads = prep_crash_data(df_crashes_roads)
 
 # Split crashes into urban
-df_crashes_urban = df_crashes[df_crashes["urban"] == 1]
+df_crashes_urban = df_crashes_roads[df_crashes_roads["urban"] == 1]
 df_crash_sev_urban = df_3mile[df_3mile["URBAN"] == 1]
 
 agg_sev_urban = prep_agg_data(df_crashes_urban, ['SEVERITY', 'Severity'], 'count')
-agg_road_class = prep_agg_data(df_crashes_urban, ['FUNC_CLS', 'ROAD_CLASS_DESC'], 'count')
+agg_road_class = prep_agg_data(df_crashes_roads, ['DISPLAY'], 'count', roadclass=True)
+
+# Add proportions
+agg_road_class["proportion"] = (
+    agg_road_class["count"] / agg_road_class["count"].sum()
+)
+agg_sev_urban["proportion"] = (
+    agg_sev_urban["count"] / agg_sev_urban["count"].sum()
+)
 
 # ----------------------------
 # Page config
@@ -69,42 +93,63 @@ col3.metric(
     "Highest Crash Rate in 3 Mile Segment",
     f"{int(peak_row['CRASHRATE']):,}"
 )
-col4.metric(highest_crash_road_class["ROAD_CLASS_DESC"],
+col4.metric(highest_crash_road_class["DISPLAY"],
             f"{int(highest_crash_road_class["count"])}",
             help="Road type w/highest # of crashes"            
 )
 # ----------------------------
 # Data Summary
 # ----------------------------
-st.subheader("# of Crashes by Road Class")
-st.bar_chart(
-    data=agg_road_class,
-    x="ROAD_CLASS_DESC",
-    y="count",
-    horizontal=True,
-    x_label="# of Crashes",
-    y_label="Road Class"
-)
+prop_toggle = st.toggle("View By Proportion")
 
-st.subheader("# of Crashes by Crash Severity")
-st.bar_chart(
-    data=agg_sev_urban,
-    x="Severity",
-    y="count",
-    horizontal=True,
-    y_label="Severity Class",
-    x_label="# of Crashes"
-)
+if prop_toggle:
+    st.subheader("# of Crashes by Road Class (Proportions)")
+    chart = (
+        alt.Chart(agg_road_class)
+        .mark_bar()
+        .encode(
+            x=alt.X("proportion:Q", axis=alt.Axis(format="%")),
+            y=alt.Y("DISPLAY:N", title="Road Class"),
+            tooltip=["DISPLAY", "proportion"]
+        )
+    )
 
-st.subheader("# of Crashes by Crash Severity (Excluding minor severities)")
-st.bar_chart(
-    data=agg_sev_urban.loc[~agg_sev_urban["SEVERITY"].isin([0,1])],
-    x="Severity",
-    y="count",
-    horizontal=True,
-    y_label="Severity Class",
-    x_label="# of Crashes"
-)
+    st.altair_chart(chart, use_container_width=True)
+
+    st.subheader("# of Crashes by Crash Severity")  
+    chart2 = (
+        alt.Chart(agg_sev_urban.loc[~agg_sev_urban["SEVERITY"].isin([0,1])])
+        .mark_bar()
+        .encode(
+            x=alt.X("proportion:Q", axis=alt.Axis(format="%"), scale=alt.Scale(domain=[0, .5])),
+            y=alt.Y("Severity:N", title="Severity Class"),
+            tooltip=["Severity", "proportion"]
+        )
+    )
+
+    st.altair_chart(chart2, use_container_width=True)
+
+else:
+    st.subheader("# of Crashes by Road Class (Totals)")
+    st.bar_chart(
+        data=agg_road_class,
+        x="DISPLAY",
+        y="count",
+        horizontal=True,
+        x_label="# of Crashes",
+        y_label="Road Class"
+    )
+
+    st.subheader("# of Crashes by Crash Severity (Totals)")
+    st.bar_chart(
+        data=agg_sev_urban.loc[~agg_sev_urban["SEVERITY"].isin([0,1])],
+        x="Severity",
+        y="count",
+        horizontal=True,
+        y_label="Severity Class",
+        x_label="# of Crashes"
+    )
+
 st.table(
     agg_sev_urban,
     border=True

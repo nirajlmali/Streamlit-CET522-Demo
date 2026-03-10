@@ -21,7 +21,13 @@ st.markdown(
     """
     This app uses HSIS crash data to answer different questions on crashes, with an overarching
     question of what differences can we spot between Urban and Rural crash data?
+
     **👈 View different pages showing different sets of data** 
+
+    ### Background
+    
+    ### Motivation
+    
 
     ### Group Members
     Ashley Carle, Alex Cheriel, Dante Shorana, Niraj Mali

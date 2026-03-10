@@ -1,12 +1,20 @@
-ID,ROAD_CLASS_DESC
-1,'R-INTERSTATE' 
-2,'R-PRN-ARTRL'
-6,'R-MIN-ARTRL'
-7,'R-COLLECTOR' 
-9,'R-UNCLASSIF'
-11,'U-INTERSTATE' 
-12,'U-FRWY/EXPRWY' 
-14,'U-OTH-PRN ARTL' 
-16,'U-MIN-ARTRL'
-17,'U-COLLECTOR' 
-19,'U-UNCLASSIFIED'
+ID,ROAD_CLASS_DESC,ROAD_CLASS_DESC_FULL
+1,'R-INTERSTATE',Rural-Interstate
+2,'R-PRN-ARTRL',Rural-Principal-Arterial
+6,'R-MIN-ARTRL',Rural-Minor-Arterial
+7,'R-COLLECTOR',Rural-Collector
+9,'R-UNCLASSIF',Rural-Unclassified
+11,'U-INTERSTATE',Urban-Interstate
+12,'U-FRWY/EXPRWY',Urban-Principal-Arterial (Freeways & Expressways)
+14,'U-OTH-PRN ARTL',Urban-Other-Principal-Arterial 
+16,'U-MIN-ARTRL',Urban-Minor-Arterial
+17,'U-COLLECTOR',Urban-Collector
+19,'U-UNCLASSIFIED',Urban-Unclassified
+
+
+
+
+
+
+
+

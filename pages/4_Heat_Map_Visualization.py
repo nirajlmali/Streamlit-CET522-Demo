@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import geopandas as gpd
+import folium
+import geodatasets
 import contextily as ctx
 
 @st.cache_data
@@ -25,6 +27,11 @@ def prep_agg_data(df, cols, indexName):
 @st.cache_data
 def prep_mean_data(df, cols, col, indexName):
     return df.groupby(cols)[col].mean().reset_index(name=indexName)
+
+# Geo data set
+# roads = load_data("clean_data/WSDOT_-_State_Route_Linear_Referencing_System_(LRS)_Current.shp", geo=True)
+# roads = roads.rename(columns={"StateRoute" : "RTE_NBR"})
+# roads.columns
 
 # Load data
 df_crashes = load_data("clean_data/crashes.csv")
