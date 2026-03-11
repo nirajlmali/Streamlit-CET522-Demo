@@ -89,10 +89,10 @@ st.set_page_config(
     page_icon="💥",
     layout="wide",
 )
-st.title("Most Dangerous Routes")
+st.title("Most Dangerous Route Segments")
 
 # ----------------------------
 # Get Top 5
 # ---------------------------
-df_top5 = df_3mile.nlargest(5, "CRASHRATE")[["RTE_NBR", 'BIN_START', 'BIN_END', "CRASH_COUNT", "CRASHRATE"]]
+df_top5 = df_3mile.nlargest(20, "CRASHRATE")[["RTE_NBR", 'BIN_START', 'BIN_END', "CRASH_COUNT", "CRASHRATE"]]
 df_top5
