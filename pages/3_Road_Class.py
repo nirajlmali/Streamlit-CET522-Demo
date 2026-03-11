@@ -124,19 +124,6 @@ if prop_toggle:
 
     st.altair_chart(chart, use_container_width=True)
 
-    st.subheader("# of Crashes by Crash Severity")  
-    chart2 = (
-        alt.Chart(agg_sev_urban.loc[~agg_sev_urban["SEVERITY"].isin([0,1])])
-        .mark_bar()
-        .encode(
-            x=alt.X("proportion:Q", axis=alt.Axis(format="%"), scale=alt.Scale(domain=[0, .5])),
-            y=alt.Y("Severity:N", title="Severity Class"),
-            tooltip=["Severity", "proportion"]
-        )
-    )
-
-    st.altair_chart(chart2, use_container_width=True)
-
 else:
     st.subheader("# of Crashes by Road Class (Totals)")
     st.bar_chart(
