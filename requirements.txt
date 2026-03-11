@@ -9,3 +9,4 @@ contextily
 altair
 shapely
 streamlit_folium
+scikit-learn
