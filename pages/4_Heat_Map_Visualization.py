@@ -18,8 +18,8 @@ st.set_page_config(
     page_icon="💥",
     layout="wide",
 )
-st.title("🔥 Heat Map Visualization")
-st.caption("Visualization of crash data on geographical map.")
+st.title("🔥 Heat Map Visualization (Top 50)")
+st.caption("Visualization of crash data on geographical map. Includes top 50 segments with highest crash rates.")
 
 
 # ----------------------------

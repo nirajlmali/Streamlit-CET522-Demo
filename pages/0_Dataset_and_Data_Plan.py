@@ -47,6 +47,11 @@ and reading of the data itself, but the structure is maintained.
 | Road_Class | ID | ROAD_CLASS_DESC | ROAD_CLASS_DESC_FULL |
 | 3milesegments | RTE_NBR, BIN_START, BIN_END | AADT_WT, CRASH_COUNT, CRASHRATE |
 
+### Limitations
+Creating a relationship between 3milesegment and Roads tables proved to be too complex due to
+bins having some road segments overlap between bins. For this study, 3milesegment was used
+independently of all other tables, so we proceeded with analysis. However, a more robust design
+would need to be used in a practical application.
 
 ### Appendix A
 Data cleaning:

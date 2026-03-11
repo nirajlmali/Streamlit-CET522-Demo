@@ -83,7 +83,7 @@ st.set_page_config(
     page_icon="💥",
     layout="wide",
 )
-st.title("⚠️Crash Severity")
+st.title("‼️Crash Severity")
 st.caption("Statistics on crash severity between Urban and Rural roads.")
 st.markdown(
     """
