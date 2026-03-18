@@ -61,6 +61,10 @@ agg_sev_rural = prep_agg_data(df_crashes_rural, ['SEVERITY', 'Severity'], 'count
 agg_road_class = prep_agg_data(df_crashes_roads, ['DISPLAY'], 'count', roadclass=True)
 agg_urban_rural = prep_agg_data(df_crashes_roads, ['label'], 'count')
 
+# remove minor crashes
+agg_sev_urban = agg_sev_urban.loc[~agg_sev_urban["SEVERITY"].isin([0,1])]
+agg_sev_rural = agg_sev_rural.loc[~agg_sev_rural["SEVERITY"].isin([0,1])]
+
 # Add proportions
 agg_road_class["proportion"] = (
     agg_road_class["count"] / agg_road_class["count"].sum()

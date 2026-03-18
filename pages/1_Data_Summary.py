@@ -10,8 +10,6 @@ import altair as alt
 
 @st.cache_data
 def load_data(path, geo=False):
-    if(geo):
-        return gpd.read_file(path)
     return pd.read_csv(path)
 
 @st.cache_data
@@ -56,8 +54,16 @@ df_crashes_rural = df_crashes_roads[df_crashes_roads["urban"] == 0]
 
 agg_sev_urban = prep_agg_data(df_crashes_urban, ['SEVERITY', 'Severity'], 'count')
 agg_sev_rural = prep_agg_data(df_crashes_rural, ['SEVERITY', 'Severity'], 'count')
-agg_road_class = prep_agg_data(df_crashes_roads, ['DISPLAY'], 'count', roadclass=True)
+agg_road_class = prep_agg_data(df_crashes_roads, ['DISPLAY', 'label'], 'count', roadclass=True)
 agg_urban_rural = prep_agg_data(df_crashes_roads, ['label'], 'count')
+
+# split to urban and Rural
+agg_road_class_urban = agg_road_class[agg_road_class["label"] == "Urban"]
+agg_road_class_rural = agg_road_class[agg_road_class["label"] == "Rural"]
+
+# remove minor crashes
+agg_sev_urban = agg_sev_urban.loc[~agg_sev_urban["SEVERITY"].isin([0,1])]
+agg_sev_rural = agg_sev_rural.loc[~agg_sev_rural["SEVERITY"].isin([0,1])]
 
 # Add proportions
 agg_road_class["proportion"] = (
@@ -71,6 +77,13 @@ agg_sev_rural["proportion"] = (
 )
 agg_urban_rural["proportion"] = (
     agg_urban_rural["count"] / agg_urban_rural["count"].sum()
+)
+
+agg_road_class_urban["proportion"] = (
+    agg_road_class_urban["count"] / agg_road_class_urban["count"].sum()
+)
+agg_road_class_rural["proportion"] = (
+    agg_road_class_rural["count"] / agg_road_class_rural["count"].sum()
 )
 
 
@@ -129,7 +142,16 @@ def distribution_plots(option):
     if option == "Crashes by Road Type":
         if prop_toggle:  
             chart = (
-                alt.Chart(agg_road_class)
+                alt.Chart(agg_road_class_urban)
+                .mark_bar()
+                .encode(
+                    x=alt.X("proportion:Q", axis=alt.Axis(format="%")),
+                    y=alt.Y("DISPLAY:N", title="Road Class"),
+                    tooltip=["DISPLAY", "proportion"]
+                )
+            )
+            chart2 = (
+                alt.Chart(agg_road_class_rural)
                 .mark_bar()
                 .encode(
                     x=alt.X("proportion:Q", axis=alt.Axis(format="%")),
@@ -139,9 +161,18 @@ def distribution_plots(option):
             )
 
             st.altair_chart(chart, use_container_width=True)
+            st.altair_chart(chart2, use_container_width=True)
         else:
             st.bar_chart(
-                data=agg_road_class,
+                data=agg_road_class_urban,
+                x="DISPLAY",
+                y="count",
+                horizontal=True,
+                x_label="# of Crashes",
+                y_label="Road Class"
+            )
+            st.bar_chart(
+                data=agg_road_class_rural,
                 x="DISPLAY",
                 y="count",
                 horizontal=True,
@@ -149,7 +180,11 @@ def distribution_plots(option):
                 y_label="Road Class"
             )
         st.table(
-            agg_road_class[["DISPLAY", "count", "proportion"]],
+            agg_road_class_urban[["DISPLAY", "count", "proportion"]],
+            border=True
+            )
+        st.table(
+            agg_road_class_rural[["DISPLAY", "count", "proportion"]],
             border=True
             )
     

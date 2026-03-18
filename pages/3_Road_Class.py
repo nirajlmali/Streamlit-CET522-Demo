@@ -67,15 +67,21 @@ df_crashes_roads = prep_crash_data(df_crashes_roads)
 df_crashes_rural = df_crashes_roads[df_crashes_roads["urban"] == 0]
 df_crash_sev_rural = df_3mile[df_3mile["URBAN"] == 0]
 
-agg_sev_rural = prep_agg_data(df_crashes_rural, ['SEVERITY', 'Severity'], 'count')
-agg_road_class = prep_agg_data(df_crashes_roads, ['DISPLAY'], 'count', roadclass=True)
+agg_road_class = prep_agg_data(df_crashes_roads, ['DISPLAY', 'label'], 'count', roadclass=True)
+
+# split to urban and Rural
+agg_road_class_urban = agg_road_class[agg_road_class["label"] == "Urban"]
+agg_road_class_rural = agg_road_class[agg_road_class["label"] == "Rural"]
 
 # Add proportions
 agg_road_class["proportion"] = (
     agg_road_class["count"] / agg_road_class["count"].sum()
 )
-agg_sev_rural["proportion"] = (
-    agg_sev_rural["count"] / agg_sev_rural["count"].sum()
+agg_road_class_urban["proportion"] = (
+    agg_road_class_urban["count"] / agg_road_class_urban["count"].sum()
+)
+agg_road_class_rural["proportion"] = (
+    agg_road_class_rural["count"] / agg_road_class_rural["count"].sum()
 )
 
 
@@ -99,7 +105,7 @@ st.markdown(
 )
 # df_rc[~df_rc["ID"].isin([6,7,9,16,17])]
 agg_road_class["DISPLAY"]
-
+# 
 # ----------------------------
 # Basic Stats
 # ----------------------------
@@ -110,10 +116,18 @@ agg_road_class["DISPLAY"]
 # ----------------------------
 prop_toggle = st.toggle("View By Proportion")
 
-if prop_toggle:
-    st.subheader("# of Crashes by Road Class (Proportions)")
+if prop_toggle:  
     chart = (
-        alt.Chart(agg_road_class)
+        alt.Chart(agg_road_class_urban)
+        .mark_bar()
+        .encode(
+            x=alt.X("proportion:Q", axis=alt.Axis(format="%")),
+            y=alt.Y("DISPLAY:N", title="Road Class"),
+            tooltip=["DISPLAY", "proportion"]
+        )
+    )
+    chart2 = (
+        alt.Chart(agg_road_class_rural)
         .mark_bar()
         .encode(
             x=alt.X("proportion:Q", axis=alt.Axis(format="%")),
@@ -123,16 +137,31 @@ if prop_toggle:
     )
 
     st.altair_chart(chart, use_container_width=True)
-
+    st.altair_chart(chart2, use_container_width=True)
 else:
-    st.subheader("# of Crashes by Road Class (Totals)")
     st.bar_chart(
-        data=agg_road_class,
+        data=agg_road_class_urban,
         x="DISPLAY",
         y="count",
         horizontal=True,
         x_label="# of Crashes",
         y_label="Road Class"
     )
-
+    st.bar_chart(
+        data=agg_road_class_rural,
+        x="DISPLAY",
+        y="count",
+        horizontal=True,
+        x_label="# of Crashes",
+        y_label="Road Class"
+    )
+st.table(
+    agg_road_class_urban[["DISPLAY", "count", "proportion"]],
+    border=True
+    )
+st.table(
+    agg_road_class_rural[["DISPLAY", "count", "proportion"]],
+    border=True
+    )
+    
 
